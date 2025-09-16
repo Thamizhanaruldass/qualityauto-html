@@ -1,527 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quality Auto's - Professional 3-Wheeler Repair Service</title>
-    <meta
-      name="description"
-      content="Quality Auto's - Your trusted partner for all 3-wheeler auto vehicle repair and maintenance needs. Over 15 years of experience."
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header" id="header">
-      <nav class="nav container">
-        <div class="nav__brand">
-          <img
-            src="logo.png"
-            alt="Quality Auto's Logo"
-            class="nav__logo"
-            style="height: 82px; vertical-align: middle; margin-right: 8px"
-          />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Autos - Your Trusted 3-Wheeler Service Partner</title>
+    <meta name="description" content="Quality Autos - Expert 3-wheeler repair and maintenance services. Engine repair, brake services, electrical work, and emergency assistance in Chennai.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <h1 class="logo">Quality Autos</h1>
+                    <p class="tagline">Your Trusted 3-Wheeler Service Partner</p>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav__list">
+                        <li><a href="#home" class="nav__link">Home</a></li>
+                        <li><a href="#services" class="nav__link">Services</a></li>
+                        <li><a href="#about" class="nav__link">About</a></li>
+                        <li><a href="#contact" class="nav__link">Contact</a></li>
+                        <li><a href="#offers" class="nav__link">Offers</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header__contact">
+                    <a href="tel:+919876543210" class="contact-phone">📞 +91 98765 43210</a>
+                </div>
+                
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
-        <div class="nav__menu" id="nav-menu">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a href="#home" class="nav__link active">Home</a>
-            </li>
-            <li class="nav__item">
-              <a href="#about" class="nav__link">About</a>
-            </li>
-            <li class="nav__item">
-              <a href="#services" class="nav__link">Services</a>
-            </li>
-            <li class="nav__item">
-              <a href="#contact" class="nav__link">Contact</a>
-            </li>
-          </ul>
-        </div>
-        <div class="nav__toggle" id="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </nav>
     </header>
 
-    <!-- Main Content -->
-    <main>
-      <!-- Hero Carousel Section -->
-      <section class="carousel" id="home">
-        <div class="carousel__container">
-          <div class="carousel__slide active">
-            <img
-              src="https://pplx-res.cloudinary.com/image/upload/v1755674299/pplx_project_search_images/32b04b3c4f577dc8bf90e3f4e94d7207d8ddba7a.png"
-              alt="Professional Auto Repair Services"
-              class="carousel__image"
-            />
-            <div class="carousel__content">
-              <h1 class="carousel__title">Professional Auto Repair Services</h1>
-              <p class="carousel__subtitle">
-                Expert mechanics for all your 3-wheeler needs
-              </p>
+    <!-- Hero Carousel Section -->
+    <section class="carousel-section" id="home">
+        <div class="carousel" id="carousel">
+            <!-- Carousel Slide 1: Engine Repair Offer -->
+            <!-- TO UPDATE: Change background-color in CSS, modify title/subtitle text, update CTA link -->
+            <div class="carousel__slide active" data-bg="#2c5aa0">
+                <div class="carousel__content">
+                    <div class="container">
+                        <div class="carousel__text">
+                            <h2 class="carousel__title">50% OFF Engine Repair</h2>
+                            <p class="carousel__subtitle">Limited time offer on all engine services</p>
+                            <a href="#contact" class="btn btn--primary carousel__cta">Book Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="carousel__slide">
-            <img
-              src="https://pplx-res.cloudinary.com/image/upload/v1756522201/pplx_project_search_images/535ec7b55e537024dcf4faf4d9fc622caadc8f1f.png"
-              alt="Modern Workshop Facility"
-              class="carousel__image"
-            />
-            <div class="carousel__content">
-              <h1 class="carousel__title">Modern Workshop Facility</h1>
-              <p class="carousel__subtitle">
-                State-of-the-art equipment for quality repairs
-              </p>
+            
+            <!-- Carousel Slide 2: Free Inspection Offer -->
+            <!-- TO UPDATE: Change background-color in CSS, modify title/subtitle text, update CTA link -->
+            <div class="carousel__slide" data-bg="#ff6b35">
+                <div class="carousel__content">
+                    <div class="container">
+                        <div class="carousel__text">
+                            <h2 class="carousel__title">Free Inspection</h2>
+                            <p class="carousel__subtitle">With any repair service booking</p>
+                            <a href="#contact" class="btn btn--primary carousel__cta">Get Quote</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="carousel__slide">
-            <img
-              src="https://pplx-res.cloudinary.com/image/upload/v1756612548/pplx_project_search_images/1b778fa751719c988adf99a5ac068f11d69997ce.png"
-              alt="Specialized 3-Wheeler Service"
-              class="carousel__image"
-            />
-            <div class="carousel__content">
-              <h1 class="carousel__title">Specialized 3-Wheeler Service</h1>
-              <p class="carousel__subtitle">
-                Dedicated service for auto rickshaws and cargo vehicles
-              </p>
+            
+            <!-- Carousel Slide 3: Emergency Service -->
+            <!-- TO UPDATE: Change background-color in CSS, modify title/subtitle text, update CTA link -->
+            <div class="carousel__slide" data-bg="#28a745">
+                <div class="carousel__content">
+                    <div class="container">
+                        <div class="carousel__text">
+                            <h2 class="carousel__title">24/7 Emergency Service</h2>
+                            <p class="carousel__subtitle">Breakdown assistance available round the clock</p>
+                            <a href="tel:+919876543210" class="btn btn--primary carousel__cta">Call Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="carousel__slide">
-            <img
-              src="https://pplx-res.cloudinary.com/image/upload/v1755339793/pplx_project_search_images/ce7ed9af43ef36b8344251821e3a2ed6d9a8797e.png"
-              alt="Customer First Approach"
-              class="carousel__image"
-            />
-            <div class="carousel__content">
-              <h1 class="carousel__title">Customer First Approach</h1>
-              <p class="carousel__subtitle">
-                Transparent service with quality assurance
-              </p>
-            </div>
-          </div>
+            
+            <!-- Navigation Arrows -->
+            <button class="carousel__arrow carousel__arrow--prev" id="prevBtn" aria-label="Previous slide">‹</button>
+            <button class="carousel__arrow carousel__arrow--next" id="nextBtn" aria-label="Next slide">›</button>
         </div>
-
-        <!-- Carousel Controls -->
-        <div class="carousel__controls">
-          <button class="carousel__arrow carousel__prev" id="prevSlide">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          <button class="carousel__arrow carousel__next" id="nextSlide">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Carousel Dots -->
+        
+        <!-- Navigation Dots -->
         <div class="carousel__dots">
-          <button class="carousel__dot active" data-slide="0"></button>
-          <button class="carousel__dot" data-slide="1"></button>
-          <button class="carousel__dot" data-slide="2"></button>
-          <button class="carousel__dot" data-slide="3"></button>
+            <button class="carousel__dot active" data-slide="0" aria-label="Go to slide 1"></button>
+            <button class="carousel__dot" data-slide="1" aria-label="Go to slide 2"></button>
+            <button class="carousel__dot" data-slide="2" aria-label="Go to slide 3"></button>
         </div>
-      </section>
+    </section>
 
-      <!-- About Section -->
-      <section class="about" id="about">
+    <!-- Services Section -->
+    <section class="services" id="services">
         <div class="container">
-          <div class="section__header">
-            <h2 class="section__title">About Quality Auto's</h2>
-            <p class="section__subtitle">
-              Your trusted partner for all 3-wheeler auto vehicle repair and
-              maintenance needs
-            </p>
-          </div>
-          <div class="about__content">
-            <div class="about__text">
-              <h3>Over 15 Years of Excellence</h3>
-              <p>
-                With more than 15 years of experience in the automotive repair
-                industry, Quality Auto's has established itself as the premier
-                destination for 3-wheeler auto vehicle service and repair. Our
-                team of certified mechanics brings unmatched expertise and
-                dedication to every job.
-              </p>
-
-              <div class="about__features">
-                <div class="feature">
-                  <div class="feature__icon">🔧</div>
-                  <div class="feature__content">
-                    <h4>Expert Mechanics</h4>
-                    <p>
-                      Certified professionals with extensive experience in
-                      3-wheeler repairs
-                    </p>
-                  </div>
-                </div>
-                <div class="feature">
-                  <div class="feature__icon">⭐</div>
-                  <div class="feature__content">
-                    <h4>Quality Assurance</h4>
-                    <p>
-                      We guarantee the highest standards of service and
-                      workmanship
-                    </p>
-                  </div>
-                </div>
-                <div class="feature">
-                  <div class="feature__icon">🕒</div>
-                  <div class="feature__content">
-                    <h4>Timely Service</h4>
-                    <p>Quick turnaround time without compromising on quality</p>
-                  </div>
-                </div>
-              </div>
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Complete 3-wheeler repair and maintenance solutions</p>
             </div>
-            <div class="about__image">
-              <img
-                src="https://pplx-res.cloudinary.com/image/upload/v1755339793/pplx_project_search_images/e17a7544df1f8022bb8dbbe998244e4b63656eb7.png"
-                alt="Quality Auto's Workshop"
-                loading="lazy"
-              />
+            
+            <div class="services__grid">
+                <div class="service-card">
+                    <div class="service-card__icon">🔧</div>
+                    <h3 class="service-card__title">Engine Repair & Maintenance</h3>
+                    <p class="service-card__description">Complete engine overhaul and regular maintenance services</p>
+                    <a href="#contact" class="service-card__link">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">🛑</div>
+                    <h3 class="service-card__title">Brake System Services</h3>
+                    <p class="service-card__description">Brake pad replacement, disc servicing, and safety checks</p>
+                    <a href="#contact" class="service-card__link">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">⚡</div>
+                    <h3 class="service-card__title">Electrical Work</h3>
+                    <p class="service-card__description">Wiring, lighting, and electrical component repairs</p>
+                    <a href="#contact" class="service-card__link">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">🎨</div>
+                    <h3 class="service-card__title">Body Repair & Painting</h3>
+                    <p class="service-card__description">Denting, painting, and bodywork restoration</p>
+                    <a href="#contact" class="service-card__link">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">🔩</div>
+                    <h3 class="service-card__title">Spare Parts Supply</h3>
+                    <p class="service-card__description">Genuine and compatible spare parts for all models</p>
+                    <a href="#contact" class="service-card__link">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-card__icon">🚗</div>
+                    <h3 class="service-card__title">Emergency Roadside Assistance</h3>
+                    <p class="service-card__description">24/7 breakdown service and towing</p>
+                    <a href="tel:+919876543210" class="service-card__link">Call Now</a>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- Services Section -->
-      <section class="services" id="services">
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
         <div class="container">
-          <div class="section__header">
-            <h2 class="section__title">Our Specialty Services</h2>
-            <p class="section__subtitle">
-              Comprehensive repair and maintenance solutions for all 3-wheeler
-              vehicles
-            </p>
-          </div>
-          <div class="services__grid">
-            <!-- Engine Services -->
-            <div class="service__category">
-              <div class="service__header">
-                <div class="service__icon">🔧</div>
-                <h3>Engine Services</h3>
-              </div>
-              <ul class="service__list">
-                <li>Complete engine diagnostics</li>
-                <li>Engine repair and rebuilding</li>
-                <li>Fuel injection service</li>
-                <li>Cooling system repair</li>
-                <li>Belt and hose replacement</li>
-                <li>Engine oil change and maintenance</li>
-              </ul>
+            <div class="section-header">
+                <h2>Why Choose Quality Autos?</h2>
+                <p>Your trusted partner for all 3-wheeler service needs</p>
             </div>
-
-            <!-- Transmission Services -->
-            <div class="service__category">
-              <div class="service__header">
-                <div class="service__icon">⚙️</div>
-                <h3>Transmission Services</h3>
-              </div>
-              <ul class="service__list">
-                <li>Clutch repair and replacement</li>
-                <li>Transmission fluid service</li>
-                <li>Gearbox maintenance</li>
-                <li>Drive belt replacement</li>
-                <li>Axle repair and replacement</li>
-              </ul>
+            
+            <div class="features__grid">
+                <div class="feature-card">
+                    <div class="feature-card__icon">⭐</div>
+                    <h3 class="feature-card__title">15+ Years Experience</h3>
+                    <p class="feature-card__description">Trusted by thousands of 3-wheeler owners</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-card__icon">👨‍🔧</div>
+                    <h3 class="feature-card__title">Certified Technicians</h3>
+                    <p class="feature-card__description">Skilled professionals with proper training</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-card__icon">✅</div>
+                    <h3 class="feature-card__title">Genuine Parts</h3>
+                    <p class="feature-card__description">Only authentic spare parts and components</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-card__icon">💰</div>
+                    <h3 class="feature-card__title">Affordable Pricing</h3>
+                    <p class="feature-card__description">Competitive rates with transparent billing</p>
+                </div>
             </div>
-
-            <!-- Electrical Services -->
-            <div class="service__category">
-              <div class="service__header">
-                <div class="service__icon">⚡</div>
-                <h3>Electrical Services</h3>
-              </div>
-              <ul class="service__list">
-                <li>Battery testing and replacement</li>
-                <li>Starter and alternator repair</li>
-                <li>Electrical wiring diagnosis</li>
-                <li>Lighting system repair</li>
-                <li>Horn and electrical accessories</li>
-              </ul>
-            </div>
-
-            <!-- Body Work & Painting -->
-            <div class="service__category">
-              <div class="service__header">
-                <div class="service__icon">🎨</div>
-                <h3>Body Work & Painting</h3>
-              </div>
-              <ul class="service__list">
-                <li>Denting and painting services</li>
-                <li>Body panel repair</li>
-                <li>Welding and fabrication</li>
-                <li>Rust treatment</li>
-                <li>Custom paint jobs</li>
-                <li>Accident damage repair</li>
-              </ul>
-            </div>
-
-            <!-- General Maintenance -->
-            <div class="service__category">
-              <div class="service__header">
-                <div class="service__icon">🔨</div>
-                <h3>General Maintenance</h3>
-              </div>
-              <ul class="service__list">
-                <li>Regular service and maintenance</li>
-                <li>Brake system service</li>
-                <li>Tire repair and replacement</li>
-                <li>Suspension system repair</li>
-                <li>Wheel alignment and balancing</li>
-                <li>AC service and repair</li>
-              </ul>
-            </div>
-
-            <!-- Emergency Services -->
-            <div class="service__category">
-              <div class="service__header">
-                <div class="service__icon">🚨</div>
-                <h3>Emergency Services</h3>
-              </div>
-              <ul class="service__list">
-                <li>24/7 roadside assistance</li>
-                <li>Emergency towing service</li>
-                <li>Jump start service</li>
-                <li>Flat tire assistance</li>
-                <li>Fuel delivery service</li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- Contact Section -->
-      <section class="contact" id="contact">
+    <!-- About Section -->
+    <section class="about" id="about">
         <div class="container">
-          <div class="section__header">
-            <h2 class="section__title">Contact Us</h2>
-            <p class="section__subtitle">
-              Get in touch for all your 3-wheeler repair needs
-            </p>
-          </div>
-          <div class="contact__content">
-            <div class="contact__info">
-              <div class="contact__item">
-                <div class="contact__icon">📞</div>
-                <div>
-                  <h4>Phone</h4>
-                  <p>+91 98765 43210</p>
+            <div class="about__content">
+                <div class="about__text">
+                    <h2>About Quality Autos</h2>
+                    <p>With over 15 years of experience in the automotive industry, Quality Autos has established itself as Chennai's premier 3-wheeler service center. We specialize in comprehensive repair and maintenance services for all types of three-wheelers.</p>
+                    <p>Our team of certified technicians uses only genuine spare parts and modern diagnostic equipment to ensure your vehicle runs smoothly and safely on the road.</p>
+                    <div class="about__stats">
+                        <div class="stat">
+                            <h3>5000+</h3>
+                            <p>Happy Customers</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat">
+                            <h3>24/7</h3>
+                            <p>Emergency Service</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="contact__item">
-                <div class="contact__icon">✉️</div>
-                <div>
-                  <h4>Email</h4>
-                  <p>info@qualityautos.com</p>
+                <div class="about__image">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1757995088/pplx_project_search_images/5a20f18d59f6e931ed3fe18ae963730ea1b177c6.png" alt="Auto rickshaw repair service" />
                 </div>
-              </div>
-              <div class="contact__item">
-                <div class="contact__icon">📍</div>
-                <div>
-                  <h4>Address</h4>
-                  <p>
-                    123 Auto Street, Industrial Area<br />Chidambaram - 605001
-                  </p>
-                </div>
-              </div>
-              <div class="contact__item">
-                <div class="contact__icon">🕒</div>
-                <div>
-                  <h4>Business Hours</h4>
-                  <p>
-                    Monday - Saturday: 8:00 AM - 7:00 PM<br />Sunday: 10:00 AM -
-                    5:00 PM
-                  </p>
-                </div>
-              </div>
             </div>
-            <div class="contact__form">
-              <form id="contact-form">
-                <div class="form-group">
-                  <label for="name" class="form-label">Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="form-control"
-                    required
-                  />
-                  <div class="error-message" id="name-error"></div>
-                </div>
-                <div class="form-group">
-                  <label for="phone" class="form-label">Phone *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    class="form-control"
-                    required
-                  />
-                  <div class="error-message" id="phone-error"></div>
-                </div>
-                <div class="form-group">
-                  <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                  />
-                  <div class="error-message" id="email-error"></div>
-                </div>
-                <div class="form-group">
-                  <label for="vehicle-type" class="form-label"
-                    >Vehicle Type</label
-                  >
-                  <select
-                    id="vehicle-type"
-                    name="vehicle-type"
-                    class="form-control"
-                  >
-                    <option value="">Select vehicle type</option>
-                    <option value="auto-rickshaw">Auto Rickshaw</option>
-                    <option value="cargo-three-wheeler">
-                      Cargo Three Wheeler
-                    </option>
-                    <option value="passenger-three-wheeler">
-                      Passenger Three Wheeler
-                    </option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="service-required" class="form-label"
-                    >Service Required</label
-                  >
-                  <select
-                    id="service-required"
-                    name="service-required"
-                    class="form-control"
-                  >
-                    <option value="">Select service</option>
-                    <option value="engine-service">Engine Service</option>
-                    <option value="transmission-service">
-                      Transmission Service
-                    </option>
-                    <option value="electrical-service">
-                      Electrical Service
-                    </option>
-                    <option value="body-work">Body Work & Painting</option>
-                    <option value="general-maintenance">
-                      General Maintenance
-                    </option>
-                    <option value="emergency-service">Emergency Service</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="message" class="form-label">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    class="form-control"
-                    rows="4"
-                    placeholder="Please describe your requirements or issues..."
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn btn--primary btn--full-width">
-                  Send Message
-                </button>
-              </form>
-              <div class="form-success hidden" id="form-success">
-                <div class="success-message">
-                  <div class="success-icon">✅</div>
-                  <p>
-                    Thank you! Your message has been sent successfully. We'll
-                    get back to you soon.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
-    </main>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Contact us for all your 3-wheeler service needs</p>
+            </div>
+            
+            <div class="contact__content">
+                <div class="contact__info">
+                    <div class="contact__item">
+                        <h3>📍 Location</h3>
+                        <p>123 Service Road, Industrial Area<br>Chennai - 600001, Tamil Nadu</p>
+                    </div>
+                    
+                    <div class="contact__item">
+                        <h3>📞 Phone</h3>
+                        <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                    </div>
+                    
+                    <div class="contact__item">
+                        <h3>✉️ Email</h3>
+                        <p><a href="mailto:info@qualityautos.in">info@qualityautos.in</a></p>
+                    </div>
+                    
+                    <div class="contact__item">
+                        <h3>🕒 Business Hours</h3>
+                        <p>Mon-Sat: 8:00 AM - 8:00 PM<br>Sun: 9:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+                
+                <form class="contact__form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service" class="form-label">Service Needed</label>
+                        <select id="service" name="service" class="form-control">
+                            <option value="">Select a service</option>
+                            <option value="engine">Engine Repair</option>
+                            <option value="brake">Brake Services</option>
+                            <option value="electrical">Electrical Work</option>
+                            <option value="body">Body Repair</option>
+                            <option value="parts">Spare Parts</option>
+                            <option value="emergency">Emergency Service</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-control" rows="4" placeholder="Describe your service requirements..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary btn--full-width">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="container">
-        <div class="footer__content">
-          <div class="footer__section">
-            <a href="#home" class="footer__logo-link">
-              <img src="logo.png" alt="Quality Auto's Logo" class="footer__logo" style="height:117.6px;width:250px;vertical-align:middle;margin-right:8px;">
-              
-            </a>
-            <p>
-              Your trusted partner for all 3-wheeler auto vehicle repair and
-              maintenance needs. Over 15 years of experience in automotive
-              repair industry.
-            </p>
-          </div>
-          <div class="footer__section">
-            <h4>Quick Links</h4>
-            <ul class="footer__links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-          <div class="footer__section">
-            <h4>Our Services</h4>
-            <ul class="footer__links">
-              <li><a href="#services">Engine Services</a></li>
-              <li><a href="#services">Transmission Services</a></li>
-              <li><a href="#services">Electrical Services</a></li>
-              <li><a href="#services">Emergency Services</a></li>
-            </ul>
-          </div>
-          <div class="footer__section">
-            <h4>Contact Info</h4>
-            <div class="footer__contact">
-              <p>📞 +91 9047399473</p>
-              <p>📞 +91 9087840878</p>
-              <p>✉️ support@qualityautos.com</p>
-              <p>
-                QUALITY AUTO'S,</br>
-                📍 Shop No #4, JB SAMY COMPLEX,</br>
-                (Near Mathi Bajaj), </BR>
-                CHIDAMBARAM TO CUDDALORE BYPASS ROAD,</br>
-                NORTH THILLAINAYAGAPURAM, CHIDAMBARAM - 608102.
-              </p>
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Quality Autos</h3>
+                    <p>Your trusted 3-wheeler service partner in Chennai. Quality repairs, affordable prices, and exceptional service.</p>
+                </div>
+                
+                <div class="footer__section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Engine Repair</a></li>
+                        <li><a href="#services">Brake Services</a></li>
+                        <li><a href="#services">Electrical Work</a></li>
+                        <li><a href="#services">Emergency Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>📞 <a href="tel:+919876543210">+91 98765 43210</a></li>
+                        <li>✉️ <a href="mailto:info@qualityautos.in">info@qualityautos.in</a></li>
+                        <li>📍 Chennai - 600001</li>
+                    </ul>
+                </div>
             </div>
-          </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2025 Quality Autos. All rights reserved. | Designed for Quality Service</p>
+            </div>
         </div>
-        <div class="footer__bottom">
-          <p>
-            &copy; 2025 Quality Auto's. All rights reserved. Professional
-            3-Wheeler Repair Services.
-          </p>
-        </div>
-      </div>
     </footer>
 
     <script src="app.js"></script>
-  </body>
+</body>
 </html>

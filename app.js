@@ -1,384 +1,533 @@
-// Quality Auto's Website JavaScript
+// Quality Autos Website JavaScript
+// Main functionality for carousel, navigation, and interactions
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all components
-    initCarousel();
-    initNavigation();
-    initSmoothScrolling();
-    initFormValidation();
-    initStickyHeader();
-    initImageLazyLoading();
-});
-
-// Carousel Functionality
-function initCarousel() {
+    
+    // ==========================================
+    // CAROUSEL FUNCTIONALITY
+    // ==========================================
+    
+    const carousel = document.getElementById('carousel');
     const slides = document.querySelectorAll('.carousel__slide');
     const dots = document.querySelectorAll('.carousel__dot');
-    const prevBtn = document.getElementById('prevSlide');
-    const nextBtn = document.getElementById('nextSlide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     
     let currentSlide = 0;
-    let slideInterval;
+    let autoPlayInterval;
+    let isAutoPlaying = true;
     
-    // Auto advance slides every 4 seconds
-    function startAutoSlide() {
-        slideInterval = setInterval(() => {
-            nextSlide();
-        }, 4000);
-    }
+    // Auto-play settings
+    const AUTOPLAY_DURATION = 5000; // 5 seconds
     
-    // Stop auto slide when user interacts
-    function stopAutoSlide() {
-        clearInterval(slideInterval);
+    /**
+     * CAROUSEL UPDATE INSTRUCTIONS:
+     * 
+     * To add a new slide:
+     * 1. Add a new .carousel__slide div in index.html
+     * 2. Add corresponding .carousel__dot button
+     * 3. Add CSS background color in style.css for the new slide
+     * 4. Update the slides and dots NodeLists will automatically include new elements
+     * 
+     * To modify existing slides:
+     * 1. Edit the title/subtitle text in the HTML
+     * 2. Update the CTA link href attribute
+     * 3. Change background colors in the CSS file
+     */
+    
+    // Initialize carousel
+    function initCarousel() {
+        if (slides.length === 0) return;
+        
+        console.log('Initializing carousel with', slides.length, 'slides');
+        
+        // Set first slide as active
+        showSlide(0);
+        
+        // Start autoplay
+        startAutoPlay();
+        
+        // Add event listeners
+        setupCarouselEvents();
     }
     
     // Show specific slide
     function showSlide(index) {
+        // Ensure index is within bounds
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+        
+        console.log('Showing slide:', index);
+        
         // Remove active class from all slides and dots
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
         
         // Add active class to current slide and dot
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+        if (dots[index]) {
+            dots[index].classList.add('active');
+        }
         
         currentSlide = index;
     }
     
-    // Next slide
+    // Navigate to next slide
     function nextSlide() {
-        const next = (currentSlide + 1) % slides.length;
-        showSlide(next);
+        showSlide(currentSlide + 1);
     }
     
-    // Previous slide
+    // Navigate to previous slide
     function prevSlide() {
-        const prev = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prev);
+        showSlide(currentSlide - 1);
     }
     
-    // Event listeners for controls
-    nextBtn.addEventListener('click', () => {
-        stopAutoSlide();
-        nextSlide();
-        setTimeout(startAutoSlide, 5000); // Restart auto slide after 5 seconds
-    });
+    // Start auto-play
+    function startAutoPlay() {
+        if (!isAutoPlaying || slides.length <= 1) return;
+        
+        console.log('Starting autoplay');
+        stopAutoPlay(); // Clear any existing interval
+        
+        autoPlayInterval = setInterval(() => {
+            nextSlide();
+        }, AUTOPLAY_DURATION);
+    }
     
-    prevBtn.addEventListener('click', () => {
-        stopAutoSlide();
-        prevSlide();
-        setTimeout(startAutoSlide, 5000);
-    });
-    
-    // Event listeners for dots
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            stopAutoSlide();
-            showSlide(index);
-            setTimeout(startAutoSlide, 5000);
-        });
-    });
-    
-    // Pause on hover
-    const carousel = document.querySelector('.carousel');
-    carousel.addEventListener('mouseenter', stopAutoSlide);
-    carousel.addEventListener('mouseleave', startAutoSlide);
-    
-    // Start auto slide
-    startAutoSlide();
-}
-
-// Navigation Functionality
-function initNavigation() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav__link');
-    
-    // Toggle mobile menu
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-    
-    // Close menu when clicking on a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
+    // Stop auto-play
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
         }
-    });
+    }
     
-    // Update active nav link on scroll
-    updateActiveNavLink();
-}
-
-// Smooth Scrolling
-function initSmoothScrolling() {
-    const navLinks = document.querySelectorAll('.nav__link[href^="#"]');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Update active navigation link based on scroll position
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav__link');
-    
-    window.addEventListener('scroll', () => {
-        const scrollPos = window.scrollY + 200;
+    // Setup carousel event listeners
+    function setupCarouselEvents() {
+        console.log('Setting up carousel events');
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                const activeLink = document.querySelector(`.nav__link[href="#${sectionId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-            }
-        });
-    });
-}
-
-// Sticky Header
-function initStickyHeader() {
-    const header = document.getElementById('header');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        // Navigation arrows
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Previous button clicked');
+                prevSlide();
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 1000);
+            });
         }
-    });
-}
-
-// Form Validation and Submission
-function initFormValidation() {
-    const form = document.getElementById('contact-form');
-    const formSuccess = document.getElementById('form-success');
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
         
-        if (validateForm()) {
-            submitForm();
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Next button clicked');
+                nextSlide();
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 1000);
+            });
         }
-    });
-    
-    // Real-time validation
-    const inputs = form.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        input.addEventListener('blur', () => {
-            validateField(input);
-        });
         
-        input.addEventListener('input', () => {
-            clearFieldError(input);
-        });
-    });
-}
-
-function validateForm() {
-    let isValid = true;
-    
-    // Name validation
-    const name = document.getElementById('name');
-    if (!name.value.trim()) {
-        showFieldError(name, 'Name is required');
-        isValid = false;
-    } else if (name.value.trim().length < 2) {
-        showFieldError(name, 'Name must be at least 2 characters');
-        isValid = false;
-    }
-    
-    // Phone validation
-    const phone = document.getElementById('phone');
-    const phoneRegex = /^[+]?[\d\s\-\(\)]{10,}$/;
-    if (!phone.value.trim()) {
-        showFieldError(phone, 'Phone number is required');
-        isValid = false;
-    } else if (!phoneRegex.test(phone.value.trim())) {
-        showFieldError(phone, 'Please enter a valid phone number');
-        isValid = false;
-    }
-    
-    // Email validation (optional but if provided, must be valid)
-    const email = document.getElementById('email');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email.value.trim() && !emailRegex.test(email.value.trim())) {
-        showFieldError(email, 'Please enter a valid email address');
-        isValid = false;
-    }
-    
-    return isValid;
-}
-
-function validateField(field) {
-    clearFieldError(field);
-    
-    switch (field.id) {
-        case 'name':
-            if (!field.value.trim()) {
-                showFieldError(field, 'Name is required');
-            } else if (field.value.trim().length < 2) {
-                showFieldError(field, 'Name must be at least 2 characters');
-            }
-            break;
-        case 'phone':
-            const phoneRegex = /^[+]?[\d\s\-\(\)]{10,}$/;
-            if (!field.value.trim()) {
-                showFieldError(field, 'Phone number is required');
-            } else if (!phoneRegex.test(field.value.trim())) {
-                showFieldError(field, 'Please enter a valid phone number');
-            }
-            break;
-        case 'email':
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (field.value.trim() && !emailRegex.test(field.value.trim())) {
-                showFieldError(field, 'Please enter a valid email address');
-            }
-            break;
-    }
-}
-
-function showFieldError(field, message) {
-    const errorElement = document.getElementById(field.id + '-error');
-    if (errorElement) {
-        errorElement.textContent = message;
-        errorElement.classList.add('show');
-    }
-    field.classList.add('error');
-}
-
-function clearFieldError(field) {
-    const errorElement = document.getElementById(field.id + '-error');
-    if (errorElement) {
-        errorElement.classList.remove('show');
-    }
-    field.classList.remove('error');
-}
-
-function submitForm() {
-    const form = document.getElementById('contact-form');
-    const formSuccess = document.getElementById('form-success');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    
-    // Show loading state
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-    
-    // Simulate form submission (in real implementation, this would be an actual API call)
-    setTimeout(() => {
-        // Hide form and show success message
-        form.style.display = 'none';
-        formSuccess.classList.remove('hidden');
-        
-        // Reset form after showing success
-        setTimeout(() => {
-            form.reset();
-            form.style.display = 'block';
-            formSuccess.classList.add('hidden');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            
-            // Clear any remaining errors
-            const errorMessages = form.querySelectorAll('.error-message');
-            errorMessages.forEach(error => error.classList.remove('show'));
-            
-            const inputs = form.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => input.classList.remove('error'));
-        }, 3000);
-    }, 1000);
-}
-
-// Image Lazy Loading
-function initImageLazyLoading() {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.setAttribute('data-loaded', 'true');
-                    observer.unobserve(img);
-                }
+        // Navigation dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Dot clicked:', index);
+                showSlide(index);
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 1000);
             });
         });
         
-        images.forEach(img => {
-            img.setAttribute('data-loaded', 'false');
-            imageObserver.observe(img);
-        });
-    } else {
-        // Fallback for older browsers
-        images.forEach(img => {
-            img.setAttribute('data-loaded', 'true');
-        });
-    }
-}
-
-// Utility function to handle resize events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Handle window resize
-window.addEventListener('resize', debounce(() => {
-    // Close mobile menu on resize to desktop
-    if (window.innerWidth > 768) {
-        const navToggle = document.getElementById('nav-toggle');
-        const navMenu = document.getElementById('nav-menu');
+        // Pause on hover
+        if (carousel) {
+            carousel.addEventListener('mouseenter', function() {
+                console.log('Carousel hovered - pausing autoplay');
+                stopAutoPlay();
+            });
+            
+            carousel.addEventListener('mouseleave', function() {
+                console.log('Carousel unhovered - resuming autoplay');
+                if (isAutoPlaying) {
+                    startAutoPlay();
+                }
+            });
+        }
         
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+        // Touch/swipe support for mobile
+        setupTouchEvents();
     }
-}, 250));
+    
+    // Touch and swipe events for mobile
+    function setupTouchEvents() {
+        let startX = 0;
+        let endX = 0;
+        const minSwipeDistance = 50;
+        
+        if (carousel) {
+            carousel.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            });
+            
+            carousel.addEventListener('touchend', function(e) {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+        }
+        
+        function handleSwipe() {
+            const swipeDistance = startX - endX;
+            
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    prevSlide();
+                }
+                
+                // Restart autoplay after swipe
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 1000);
+            }
+        }
+    }
+    
+    // ==========================================
+    // MOBILE NAVIGATION
+    // ==========================================
+    
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    const navLinks = document.querySelectorAll('.nav__link');
+    
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        console.log('Toggling mobile menu');
+        if (menuToggle && nav) {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+    }
+    
+    // Setup mobile menu events
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleMobileMenu();
+        });
+    }
+    
+    // Close mobile menu when clicking nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (nav && nav.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (nav && nav.classList.contains('active') && 
+            !nav.contains(e.target) && 
+            !menuToggle.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
+    
+    // ==========================================
+    // SMOOTH SCROLLING
+    // ==========================================
+    
+    // Smooth scroll for anchor links
+    function setupSmoothScrolling() {
+        console.log('Setting up smooth scrolling');
+        
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        console.log('Found', anchorLinks.length, 'anchor links');
+        
+        anchorLinks.forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                console.log('Clicking anchor link:', targetId);
+                
+                if (targetId === '#' || targetId === '#home') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+                
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const header = document.querySelector('.header');
+                    const headerHeight = header ? header.offsetHeight : 80;
+                    const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                    
+                    console.log('Scrolling to position:', targetPosition);
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    console.warn('Target section not found:', targetId);
+                }
+            });
+        });
+    }
+    
+    // ==========================================
+    // CONTACT FORM
+    // ==========================================
+    
+    function setupContactForm() {
+        const contactForm = document.querySelector('.contact__form');
+        console.log('Contact form found:', contactForm ? 'Yes' : 'No');
+        
+        if (contactForm) {
+            // Ensure form fields are editable
+            const formInputs = contactForm.querySelectorAll('input, select, textarea');
+            formInputs.forEach(input => {
+                input.removeAttribute('readonly');
+                input.removeAttribute('disabled');
+            });
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Contact form submitted');
+                
+                // Get form data
+                const formData = new FormData(contactForm);
+                const name = formData.get('name') ? formData.get('name').trim() : '';
+                const phone = formData.get('phone') ? formData.get('phone').trim() : '';
+                const service = formData.get('service') ? formData.get('service').trim() : '';
+                const message = formData.get('message') ? formData.get('message').trim() : '';
+                
+                console.log('Form data:', { name, phone, service, message });
+                
+                // Basic validation
+                if (!name || !phone) {
+                    alert('Please fill in all required fields (Name and Phone)');
+                    return;
+                }
+                
+                // Phone validation (basic pattern)
+                const phonePattern = /^[\+]?[0-9\s\-]{10,15}$/;
+                if (!phonePattern.test(phone)) {
+                    alert('Please enter a valid phone number');
+                    return;
+                }
+                
+                // Simulate form submission
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    alert('Thank you for your inquiry! We will contact you within 24 hours.');
+                    contactForm.reset();
+                    
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+        }
+    }
+    
+    // ==========================================
+    // SCROLL ANIMATIONS
+    // ==========================================
+    
+    // Simple scroll reveal animation
+    function handleScrollAnimations() {
+        // Check if IntersectionObserver is supported
+        if (!window.IntersectionObserver) {
+            console.log('IntersectionObserver not supported');
+            return;
+        }
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe service cards and feature cards
+        const animatedElements = document.querySelectorAll('.service-card, .feature-card, .about__text, .about__image');
+        
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
+    
+    // ==========================================
+    // KEYBOARD NAVIGATION
+    // ==========================================
+    
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', function(e) {
+            // Only handle carousel keyboard navigation when carousel is in viewport
+            if (!carousel) return;
+            
+            const carouselRect = carousel.getBoundingClientRect();
+            const isCarouselVisible = carouselRect.top < window.innerHeight && carouselRect.bottom > 0;
+            
+            if (!isCarouselVisible) return;
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    prevSlide();
+                    stopAutoPlay();
+                    setTimeout(startAutoPlay, 2000);
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextSlide();
+                    stopAutoPlay();
+                    setTimeout(startAutoPlay, 2000);
+                    break;
+                case ' ': // Spacebar
+                    e.preventDefault();
+                    if (isAutoPlaying) {
+                        stopAutoPlay();
+                        isAutoPlaying = false;
+                        console.log('Autoplay paused');
+                    } else {
+                        isAutoPlaying = true;
+                        startAutoPlay();
+                        console.log('Autoplay resumed');
+                    }
+                    break;
+            }
+        });
+    }
+    
+    // ==========================================
+    // UTILITY FUNCTIONS
+    // ==========================================
+    
+    // Debounce function for performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Handle window resize
+    const handleResize = debounce(() => {
+        // Re-initialize carousel if needed
+        if (window.innerWidth <= 768) {
+            // Mobile adjustments
+        }
+    }, 250);
+    
+    window.addEventListener('resize', handleResize);
+    
+    // ==========================================
+    // CTA TRACKING
+    // ==========================================
+    
+    function setupCTATracking() {
+        const ctaButtons = document.querySelectorAll('.carousel__cta, .service-card__link, .btn--primary, .contact-phone');
+        
+        ctaButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.textContent.trim();
+                const section = this.closest('section') ? this.closest('section').className : 'header';
+                
+                console.log('CTA Clicked:', {
+                    buttonText: buttonText,
+                    section: section,
+                    url: this.href || 'no-url',
+                    timestamp: new Date().toISOString()
+                });
+            });
+        });
+    }
+    
+    // ==========================================
+    // INITIALIZE ALL COMPONENTS
+    // ==========================================
+    
+    console.log('Quality Autos: Starting initialization...');
+    
+    // Initialize all components
+    setTimeout(() => {
+        initCarousel();
+        setupSmoothScrolling();
+        setupContactForm();
+        handleScrollAnimations();
+        setupKeyboardNavigation();
+        setupCTATracking();
+        
+        // Add loading class removal
+        document.body.classList.add('loaded');
+        
+        console.log('Quality Autos website initialized successfully!');
+    }, 100);
+});
 
-// Add CSS class for error state
-const style = document.createElement('style');
-style.textContent = `
-    .form-control.error {
-        border-color: var(--color-error);
-        box-shadow: 0 0 0 3px rgba(var(--color-error-rgb), 0.1);
+// ==========================================
+// PERFORMANCE MONITORING
+// ==========================================
+
+window.addEventListener('load', function() {
+    if (performance.timing) {
+        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+        console.log('Page load time:', loadTime + 'ms');
+        
+        if (loadTime > 3000) {
+            console.warn('Page load time is above 3 seconds. Consider optimization.');
+        }
     }
-`;
-document.head.appendChild(style);
+});
+
+// Error handling
+window.addEventListener('error', function(e) {
+    console.error('JavaScript Error:', e.error);
+});
+
+// Expose functions for testing
+window.QualityAutos = {
+    showSlide: function(index) {
+        const event = new CustomEvent('showSlide', { detail: { index: index } });
+        document.dispatchEvent(event);
+    },
+    toggleMobileMenu: function() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+        if (menuToggle && nav) {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+    }
+};
